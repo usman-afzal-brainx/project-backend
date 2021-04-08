@@ -23,6 +23,7 @@ class CompanyController extends Controller
 
     public function store()
     {
+
         $company = new Company();
 
         $file = Storage::put('images', request('logo'));
