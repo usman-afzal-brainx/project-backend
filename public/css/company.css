@@ -1,0 +1,10 @@
+.company {
+    border-bottom: 1px solid black;
+    margin-bottom: 50px;
+    padding-bottom: 10px;
+}
+
+img {
+    max-width: 100px;
+    max-height: 100px;
+}

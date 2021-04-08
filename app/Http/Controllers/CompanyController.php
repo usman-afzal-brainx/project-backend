@@ -9,10 +9,18 @@ use Illuminate\Support\Facades\Storage;
 
 class CompanyController extends Controller
 {
+
+    public function index()
+    {
+        $companies = Company::latest()->paginate(2);
+        return view('company.index', ['companies' => $companies]);
+    }
+
     public function create()
     {
         return view('company.create');
     }
+
     public function store()
     {
         $company = new Company();
@@ -22,21 +30,28 @@ class CompanyController extends Controller
         $company->name = request('name');
         $company->logo_url = $file;
 
-        $country = new Country();
-        $country->name = request('name');
-        $country->save();
+        $country = Country::where('name', request('country'))->first();
 
-        $city = new City();
-        $city->name = request('name');
-        $city->country_id = $country->id;
-        $city->save();
+        if (!$country) {
+            $country = new Country();
+            $country->name = request('country');
+            $country->save();
+        }
+        $city = City::where('country_id', $country->id)->first();
+
+        if (!$city) {
+            $city = new City();
+            $city->name = request('city');
+            $city->country_id = $country->id;
+            $city->save();
+        }
 
         $company->city_id = $city->id;
         $company->save();
 
         //Storage::get('images/12gpBK4ItZ5SuRQmv3bkY0tkqoaobLWjzjGCH5Yk.jpg');
 
-        //return "Iamges has been stored";
+        return redirect("/company/create");
 
     }
 }
