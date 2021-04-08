@@ -1,9 +1,9 @@
 @extends('layout')
 
 @section('content')
-<div class="container pt-3">
+<div class="container pt-3" style="margin-bottom: 30px">
     @forelse ($employees as $employee)
-    <div class="employee">
+    <div class="employee" style="border-bottom: 1px solid; margin-bottom:50px;">
         <h3>Name:</h3>
         <p>{{$employee->name}}</p>
         <h3>Designation:</h3>

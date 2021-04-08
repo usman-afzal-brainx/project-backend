@@ -20,6 +20,8 @@ Auth::routes(['verify' => true]);
 
 Route::get('company', 'CompanyController@index');
 
+Route::get('user', 'UserController@index');
+
 Route::get('employee/create', 'EmployeeController@create');
 
 Route::post('employee/create', 'EmployeeController@store');
