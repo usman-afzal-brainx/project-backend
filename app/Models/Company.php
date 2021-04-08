@@ -13,4 +13,8 @@ class Company extends Model
     {
         return $this->belongsTo(City::class);
     }
+    public function employees()
+    {
+        return $this->hasMany(Employee::class);
+    }
 }

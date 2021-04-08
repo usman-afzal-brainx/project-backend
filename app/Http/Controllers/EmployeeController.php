@@ -8,4 +8,9 @@ class EmployeeController extends Controller
     {
         return view('employee.create');
     }
+
+    public function store()
+    {
+
+    }
 }

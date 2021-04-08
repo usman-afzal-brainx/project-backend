@@ -18,6 +18,10 @@
                     <label for="Country" class="form-label">Country</label>
                     <input type="text" class="form-control" name="country" id="Country">
                 </div>
+                <div class="mb-3">
+                    <label for="no_employees" class="form-label">Number of Employees</label>
+                    <input type="text" class="form-control" name="no_employees" id="no_employees">
+                </div>
                 <div class="form-group">
                     <label for="logo">Logo</label>
                     <input type="file" class="form-control-file" name="logo" id="logo">

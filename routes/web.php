@@ -22,6 +22,8 @@ Route::get('company', 'CompanyController@index');
 
 Route::get('employee/create', 'EmployeeController@create');
 
+Route::post('employee/create', 'EmployeeController@store');
+
 Route::get('company/create', 'CompanyController@create');
 
 Route::post('company/create', 'CompanyController@store');

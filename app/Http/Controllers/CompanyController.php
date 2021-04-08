@@ -12,7 +12,7 @@ class CompanyController extends Controller
 
     public function index()
     {
-        $companies = Company::latest()->paginate(2);
+        $companies = Company::latest()->get();
         return view('company.index', ['companies' => $companies]);
     }
 
@@ -29,6 +29,7 @@ class CompanyController extends Controller
         $file = Storage::put('images', request('logo'));
 
         $company->name = request('name');
+        $company->no_employees = request('no_employees');
         $company->logo_url = $file;
 
         $country = Country::where('name', request('country'))->first();
