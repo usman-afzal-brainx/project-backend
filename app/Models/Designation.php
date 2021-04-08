@@ -9,8 +9,8 @@ class Designation extends Model
 {
     use HasFactory;
 
-    public function empoyees()
+    public function employees()
     {
-        return $this->hasMany(Employee::class);
+        return $this->belongsToMany(Employee::class);
     }
 }

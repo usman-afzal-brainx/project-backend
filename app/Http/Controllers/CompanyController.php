@@ -16,6 +16,12 @@ class CompanyController extends Controller
         return view('company.index', ['companies' => $companies]);
     }
 
+    public function show(Company $company)
+    {
+        $employees = $company->employees;
+        return view('company.show', ['employees' => $employees]);
+    }
+
     public function create()
     {
         return view('company.create');

@@ -19,10 +19,11 @@ class CreateEmployeesTable extends Migration
             $table->string('father_name');
             $table->unsignedBigInteger('designation_id');
             $table->unsignedBigInteger('department_id');
+            $table->unsignedBigInteger('company_id');
             $table->timestamps();
             $table->foreign('designation_id')->references('id')->on('designations')->onDelete('cascade');
             $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade');
-
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
         });
     }
 

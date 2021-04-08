@@ -5,7 +5,7 @@
 <div class="container pt-3 ">
     @forelse($companies as $company)
     <div class="company">
-        <h2>Company</h2>
+        <h2><a href="/company/ {{$company->id}}">Company</a></h2>
         <h4>Name:</h4>
         <p>{{$company->name}}</p>
         <h4>City:</h4>

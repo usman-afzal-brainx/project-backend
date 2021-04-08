@@ -26,6 +26,8 @@ Route::post('employee/create', 'EmployeeController@store');
 
 Route::get('company/create', 'CompanyController@create');
 
+Route::get('company/{company}', 'CompanyController@show');
+
 Route::post('company/create', 'CompanyController@store');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');

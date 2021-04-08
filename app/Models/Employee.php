@@ -16,12 +16,12 @@ class Employee extends Model
 
     public function designation()
     {
-        return $this->hasOne(Designation::class);
+        return $this->belongsTo(Designation::class);
     }
 
     public function projects()
     {
-        return $this->hasMany(Project::class);
+        return $this->belongsToMany(Project::class);
     }
     public function company()
     {

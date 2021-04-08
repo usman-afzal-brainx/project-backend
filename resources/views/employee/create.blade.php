@@ -5,6 +5,7 @@
 <div class="container-fluid">
     <div class="row pt-3 pl-3">
         <div class="col-sm-5">
+            <h2>Employee Form</h2>
             <form method="POST" action="/employee/create" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
@@ -26,6 +27,10 @@
                 <div class="mb-3">
                     <label for="project" class="form-label">Project</label>
                     <input type="text" class="form-control" name="project" id="project">
+                </div>
+                <div class="mb-3">
+                    <label for="company" class="form-label">Company</label>
+                    <input type="text" class="form-control" name="company" id="company">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
