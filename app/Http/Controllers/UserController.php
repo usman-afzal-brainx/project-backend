@@ -10,6 +10,10 @@ class UserController extends Controller
     public function index()
     {
         $user = Auth::user();
+        if (!$user) {
+            return redirect('/login');
+        }
+
         return view('user.index', ['user' => $user]);
     }
 
@@ -21,13 +25,18 @@ class UserController extends Controller
 
     public function update()
     {
-
+        request()->validate([
+            'f_name' => 'required',
+            'cnic' => 'required',
+            'address' => 'required',
+            'dp' => 'required',
+        ]);
         $user = Auth::user();
         $user->father_name = request('f_name');
         $user->cnic = request('cnic');
         $user->address = request('address');
-        $url = Storage::put('public', request('dp'));
-        $user->dp_url = $url;
+        $url = Storage::putFile('public/images', request('dp'), 'public');
+        $user->dp_url = str_replace('public', 'storage', $url);
         $user->save();
         return redirect('/user');
     }

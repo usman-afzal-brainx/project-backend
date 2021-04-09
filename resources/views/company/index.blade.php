@@ -19,6 +19,9 @@
     <p>No companies in the database</p>
     @endforelse
     <a href="/company/create" class="btn btn-primary">Create</a>
+    <div class="d-flex justify-content-center">
+        {!! $companies->links() !!}
+    </div>
 </div>
 
 @endsection

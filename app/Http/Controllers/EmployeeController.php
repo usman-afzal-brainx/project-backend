@@ -31,6 +31,14 @@ class EmployeeController extends Controller
             'project' => 'required',
         ]);
         $company = Company::where('name', request('company'))->first();
+
+        $companyStrength = count($company->employees);
+        $companyMaxStrength = $company->no_employees;
+
+        if ($companyStrength === $companyMaxStrength) {
+            return redirect('/employee/create');
+        }
+
         if (!$company) {
             return redirect('/company/create');
         }

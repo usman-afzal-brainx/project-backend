@@ -17,6 +17,10 @@
         <h3>Address:</h3>
         <p>{{$user->address}}</p>
         @endif
+        @if ($user->dp_url)
+        <h3>Dp:</h3>
+        <img src="{{asset($user->dp_url) }}" alt="">
+        @endif
     </div>
 
 </div>
