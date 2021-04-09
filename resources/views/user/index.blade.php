@@ -22,7 +22,7 @@
         <img src="{{asset($user->dp_url) }}" alt="">
         @endif
     </div>
-
+    <a href="/user/edit" class="btn btn-primary mt-5">Edit</a>
 </div>
 
 @endsection

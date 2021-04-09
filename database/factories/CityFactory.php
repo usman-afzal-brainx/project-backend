@@ -23,7 +23,7 @@ class CityFactory extends Factory
     public function definition()
     {
         return [
-            'country_id' => Country::factory(),
+            'country_id' => Country::all(['id'])->random(),
             'name' => $this->faker->sentence,
         ];
     }

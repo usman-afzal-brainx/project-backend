@@ -13,7 +13,7 @@ class CompanyController extends Controller
     public function index()
     {
 
-        $companies = Company::latest()->paginate(1);
+        $companies = Company::latest()->paginate(5);
         return view('company.index', ['companies' => $companies]);
     }
 
@@ -25,16 +25,19 @@ class CompanyController extends Controller
 
     public function create()
     {
-        return view('company.create');
+        $countries = Country::all();
+        $cities = City::all();
+        return view('company.create', ['countries' => $countries, 'cities' => $cities]);
     }
 
     public function store()
     {
+        dd(request()->all());
         request()->validate([
             'name' => 'required',
             'city' => 'required',
             'country' => 'required',
-            'no_employees' => 'required',
+            'no_employees' => ['required', 'integer'],
             'logo' => 'required',
         ]);
 

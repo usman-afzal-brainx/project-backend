@@ -11,14 +11,7 @@
                     <label for="name" class="form-label">Name</label>
                     <input type="text" class="form-control" name="name" id="name">
                 </div>
-                <div class="mb-3">
-                    <label for="city" class="form-label">City</label>
-                    <input type="text" class="form-control" name="city" id="city">
-                </div>
-                <div class="mb-3">
-                    <label for="Country" class="form-label">Country</label>
-                    <input type="text" class="form-control" name="country" id="Country">
-                </div>
+
                 <div class="mb-3">
                     <label for="no_employees" class="form-label">Number of Employees</label>
                     <input type="text" class="form-control" name="no_employees" id="no_employees">
@@ -26,6 +19,26 @@
                 <div class="form-group">
                     <label for="logo">Logo</label>
                     <input type="file" class="form-control-file" name="logo" id="logo">
+                </div>
+                <div class="mb-3">
+                    <label for="city">City</label>
+                    <select name="city">
+                        @forelse ($cities as $city)
+                        <option value="{{$city->id}}">{{$city->name}}</option>
+                        @empty
+                        <p>No countries in the database.</p>
+                        @endforelse
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="country">Country</label>
+                    <select name="country">
+                        @forelse ($countries as $country)
+                        <option value="{{$country->id}}">{{$country->name}}</option>
+                        @empty
+                        <p>No countries in the database.</p>
+                        @endforelse
+                    </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
