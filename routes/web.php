@@ -22,6 +22,12 @@ Route::get('company', 'CompanyController@index');
 
 Route::get('user', 'UserController@index');
 
+Route::get('employee', 'EmployeeController@index');
+
+Route::get('user/edit', 'UserController@edit');
+
+Route::post('user/edit', 'UserController@update');
+
 Route::get('employee/create', 'EmployeeController@create');
 
 Route::post('employee/create', 'EmployeeController@store');

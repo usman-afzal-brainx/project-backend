@@ -10,6 +10,12 @@ use App\Models\Project;
 
 class EmployeeController extends Controller
 {
+    public function index()
+    {
+        $employees = Employee::latest()->get();
+        return view('employee.index', ['employees' => $employees]);
+    }
+
     public function create()
     {
         return view('employee.create');
@@ -17,6 +23,13 @@ class EmployeeController extends Controller
 
     public function store()
     {
+        request()->validate([
+            'name' => 'required',
+            'f_name' => 'required',
+            'department' => 'required',
+            'designation' => 'required',
+            'project' => 'required',
+        ]);
         $company = Company::where('name', request('company'))->first();
         if (!$company) {
             return redirect('/company/create');
@@ -51,6 +64,6 @@ class EmployeeController extends Controller
         $employee->company_id = $company->id;
         $employee->save();
         $employee->projects()->attach($project);
-        return redirect('/employee/create');
+        return redirect('/employee');
     }
 }

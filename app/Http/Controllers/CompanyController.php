@@ -12,6 +12,7 @@ class CompanyController extends Controller
 
     public function index()
     {
+
         $companies = Company::latest()->get();
         return view('company.index', ['companies' => $companies]);
     }
@@ -29,14 +30,22 @@ class CompanyController extends Controller
 
     public function store()
     {
+        request()->validate([
+            'name' => 'required',
+            'city' => 'required',
+            'country' => 'required',
+            'no_employees' => 'required',
+            'logo' => 'required',
+        ]);
 
         $company = new Company();
+        // $path = request()->file('logo')->store('public/images');
 
-        $file = Storage::put('images', request('logo'));
-
+        // dd(Storage::url('images/OjUUsXlAjmbbFyagvan0nfqia2bOADvuPJTb4CHe.png'));
+        $path = Storage::putFile('public/images', request('logo'), 'public');
         $company->name = request('name');
         $company->no_employees = request('no_employees');
-        $company->logo_url = $file;
+        $company->logo_url = str_replace('public', 'storage', $path);
 
         $country = Country::where('name', request('country'))->first();
 
@@ -59,7 +68,7 @@ class CompanyController extends Controller
 
         //Storage::get('images/12gpBK4ItZ5SuRQmv3bkY0tkqoaobLWjzjGCH5Yk.jpg');
 
-        return redirect("/company/create");
+        return redirect("/company");
 
     }
 }
