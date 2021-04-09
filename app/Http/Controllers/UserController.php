@@ -10,10 +10,6 @@ class UserController extends Controller
     public function index()
     {
         $user = Auth::user();
-        if (!$user) {
-            return redirect('/login');
-        }
-
         return view('user.index', ['user' => $user]);
     }
 
