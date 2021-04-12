@@ -1,5 +1,6 @@
 @extends('layout')
-
+@section('styles')
+@endsection
 @section('content')
 <div class="container-fluid">
     <div class="row pt-3 pl-3">
@@ -22,17 +23,12 @@
                 </div>
                 <div class="mb-3">
                     <label for="city">City</label>
-                    <select name="city">
-                        @forelse ($cities as $city)
-                        <option value="{{$city->id}}">{{$city->name}}</option>
-                        @empty
-                        <p>No countries in the database.</p>
-                        @endforelse
+                    <select name="city" id="city">
                     </select>
                 </div>
                 <div class="mb-3">
                     <label for="country">Country</label>
-                    <select name="country">
+                    <select name="country" id="country" onchange="handleClick()">
                         @forelse ($countries as $country)
                         <option value="{{$country->id}}">{{$country->name}}</option>
                         @empty
@@ -45,4 +41,33 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+    handleClick();
+    function handleClick(){
+       
+       let selectedValue = $('#country option:selected').val();
+       $.ajax({
+        url: "{{route('countries.cities')}}",
+        data:{
+            id: selectedValue
+        },
+        success:function(response){
+            $('#city').empty();
+            $.each(response.cities, function(index, value) {   
+            $('#city')
+                .append($("<option></option>")
+                    .attr("value", value.id)
+                    .text(value.name)); 
+});
+        }
+        });
+    //    console.log(selectedValue);
+    
+ 
+    }
+   
+</script>
 @endsection

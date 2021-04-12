@@ -32,7 +32,6 @@ class CompanyController extends Controller
 
     public function store()
     {
-        dd(request()->all());
         request()->validate([
             'name' => 'required',
             'city' => 'required',
@@ -50,21 +49,9 @@ class CompanyController extends Controller
         $company->no_employees = request('no_employees');
         $company->logo_url = str_replace('public', 'storage', $path);
 
-        $country = Country::where('name', request('country'))->first();
+        // $country = Country::where('id', request('country'))->first();
 
-        if (!$country) {
-            $country = new Country();
-            $country->name = request('country');
-            $country->save();
-        }
-        $city = City::where('country_id', $country->id)->first();
-
-        if (!$city) {
-            $city = new City();
-            $city->name = request('city');
-            $city->country_id = $country->id;
-            $city->save();
-        }
+        $city = City::where('id', request('city'))->first();
 
         $company->city_id = $city->id;
         $company->save();
