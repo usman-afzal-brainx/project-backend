@@ -18,19 +18,43 @@
                 </div>
                 <div class="mb-3">
                     <label for="department" class="form-label">Department</label>
-                    <input type="text" class="form-control" name="department" id="department">
+                    <select name="department" id="department">
+                        @forelse ($departments as $department)
+                        <option value="{{$department->id}}">{{$department->name}}</option>
+                        @empty
+                        <p>No departments in the database.</p>
+                        @endforelse
+                    </select>
                 </div>
                 <div class="mb-3">
                     <label for="designation" class="form-label">Designation</label>
-                    <input type="text" class="form-control" name="designation" id="designation">
+                    <select name="designation" id="designation">
+                        @forelse ($designations as $designation)
+                        <option value="{{$designation->id}}">{{$designation->name}}</option>
+                        @empty
+                        <p>No designations in the database.</p>
+                        @endforelse
+                    </select>
                 </div>
                 <div class="mb-3">
                     <label for="project" class="form-label">Project</label>
-                    <input type="text" class="form-control" name="project" id="project">
+                    <select name="project" id="project">
+                        @forelse ($projects as $project)
+                        <option value="{{$project->id}}">{{$project->name}}</option>
+                        @empty
+                        <p>No departments in the database.</p>
+                        @endforelse
+                    </select>
                 </div>
                 <div class="mb-3">
                     <label for="company" class="form-label">Company</label>
-                    <input type="text" class="form-control" name="company" id="company">
+                    <select name="company" id="company">
+                        @forelse ($companies as $company)
+                        <option value="{{$company->id}}">{{$company->name}}</option>
+                        @empty
+                        <p>No company in the database.</p>
+                        @endforelse
+                    </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

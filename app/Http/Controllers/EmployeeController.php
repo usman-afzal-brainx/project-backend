@@ -18,11 +18,22 @@ class EmployeeController extends Controller
 
     public function create()
     {
-        return view('employee.create');
+        $departments = Department::all();
+        $designations = Designation::all();
+        $projects = Project::all();
+        $companies = Company::all();
+
+        return view('employee.create', [
+            'departments' => $departments,
+            'designations' => $designations,
+            'projects' => $projects,
+            'companies' => $companies,
+        ]);
     }
 
     public function store()
     {
+
         request()->validate([
             'name' => 'required',
             'f_name' => 'required',
@@ -30,7 +41,8 @@ class EmployeeController extends Controller
             'designation' => 'required',
             'project' => 'required',
         ]);
-        $company = Company::where('name', request('company'))->first();
+
+        $company = Company::where('id', request('company'))->first();
 
         $companyStrength = count($company->employees);
         $companyMaxStrength = $company->no_employees;
@@ -39,34 +51,16 @@ class EmployeeController extends Controller
             return redirect('/employee/create');
         }
 
-        if (!$company) {
-            return redirect('/company/create');
-        }
         $employee = new Employee();
         $employee->name = request('name');
         $employee->father_name = request('f_name');
 
-        $designation = Designation::where('name', request('designation'))->first();
+        $designation = Designation::where('id', request('designation'))->first();
 
-        if (!$designation) {
-            $designation = new Designation();
-            $designation->name = request('designation');
-            $designation->save();
-        }
+        $department = Department::where('id', request('department'))->first();
 
-        $department = Department::where('name', request('department'))->first();
+        $project = Project::where('id', request('project'))->first();
 
-        if (!$department) {
-            $department = new Department();
-            $department->name = request('department');
-            $department->save();
-        }
-        $project = Project::where('name', request('project'))->first();
-        if (!$project) {
-            $project = new Project();
-            $project->name = request('project');
-            $project->save();
-        }
         $employee->department_id = $department->id;
         $employee->designation_id = $designation->id;
         $employee->company_id = $company->id;
