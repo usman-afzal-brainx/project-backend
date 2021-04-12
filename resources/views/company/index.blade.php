@@ -3,6 +3,7 @@
 @section('content')
 
 <div class="container pt-3 mb-5">
+
     @forelse($companies as $company)
     <div class="company">
         <h2><a href="/company/{{$company->id}}">Company</a></h2>

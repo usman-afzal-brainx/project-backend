@@ -37,17 +37,15 @@ class EmployeeController extends Controller
         request()->validate([
             'name' => 'required',
             'f_name' => 'required',
-            'department' => 'required',
-            'designation' => 'required',
-            'project' => 'required',
+            'department' => 'required | exists:departments,id',
+            'designation' => 'required | exists:designations,id',
+            'project' => 'required | exists:projects,id',
+            'company' => 'required | exists:companies,id',
         ]);
 
         $company = Company::where('id', request('company'))->first();
 
-        $companyStrength = count($company->employees);
-        $companyMaxStrength = $company->no_employees;
-
-        if ($companyStrength === $companyMaxStrength) {
+        if ($company->employees->count() === $company->no_employees) {
             return redirect('/employee/create');
         }
 
@@ -55,17 +53,11 @@ class EmployeeController extends Controller
         $employee->name = request('name');
         $employee->father_name = request('f_name');
 
-        $designation = Designation::where('id', request('designation'))->first();
-
-        $department = Department::where('id', request('department'))->first();
-
-        $project = Project::where('id', request('project'))->first();
-
-        $employee->department_id = $department->id;
-        $employee->designation_id = $designation->id;
-        $employee->company_id = $company->id;
+        $employee->department_id = request('department');
+        $employee->designation_id = request('designation');
+        $employee->company_id = request('company');
         $employee->save();
-        $employee->projects()->attach($project);
+        $employee->projects()->attach(request('project'));
         return redirect('/employee');
     }
 }

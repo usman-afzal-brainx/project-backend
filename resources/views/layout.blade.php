@@ -30,6 +30,13 @@
             </div>
         </div>
     </nav>
+    <div class="container">
+        <form action="/logout" method="POST">
+            @csrf
+            <button type="submit" class="btn btn-primary">Log Out</button>
+        </form>
+    </div>
+
     @yield('content')
     @include('layouts.partials.scripts')
 </body>
