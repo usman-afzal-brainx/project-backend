@@ -55,13 +55,15 @@
             id: selectedValue
         },
         success:function(response){
-            $('#city').empty();
-            $.each(response.cities, function(index, value) {   
-            $('#city')
-                .append($("<option></option>")
-                    .attr("value", value.id)
-                    .text(value.name)); 
-});
+            const myNode = document.getElementById("city");
+            myNode.innerHTML = '';
+            response.cities.forEach(function(value, index){
+                let x = document.createElement("OPTION");
+                x.setAttribute('value',value.id);
+                var t = document.createTextNode(value.name);
+                x.appendChild(t);
+                document.getElementById("city").appendChild(x);
+            });
         }
         });
     //    console.log(selectedValue);
