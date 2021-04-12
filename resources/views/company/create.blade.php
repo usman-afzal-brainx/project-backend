@@ -5,12 +5,8 @@
 <div class="container-fluid">
     <div class="row pt-3 pl-3">
         <div class="col-sm-6">
-            <form action="/logout" method="POST">
-                @csrf
-                <button type="submit" class="btn btn-primary">Log Out</button>
-            </form>
             <h2>Company Form</h2>
-            <form method="POST" action="/company/create" enctype="multipart/form-data">
+            <form method="POST" action="{{route('company.store')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>

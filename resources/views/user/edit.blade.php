@@ -11,8 +11,9 @@
                 @endif
                 @if($user)
                 <h2>User Form</h2>
-                <form method="POST" action="/user/edit" enctype="multipart/form-data">
+                <form method="POST" action="{{route('user.store')}}" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     <div class="mb-3">
                         <label for="f_name" class="form-label">Father's name</label>
                         <input type="text" class="form-control" name="f_name" id="f_name"

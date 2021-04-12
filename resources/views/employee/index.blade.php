@@ -23,7 +23,7 @@
     @empty
     <p>No employees yet.</p>
     @endforelse
-    <a href="/employee/create" class="btn btn-primary">Create</a>
+    <a href="{{route('employee.create')}}" class="btn btn-primary">Create</a>
 </div>
 
 @endsection

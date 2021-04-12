@@ -6,7 +6,7 @@
     <div class="row pt-3 pl-3">
         <div class="col-sm-5">
             <h2>Employee Form</h2>
-            <form method="POST" action="/employee/create" enctype="multipart/form-data">
+            <form method="POST" action="{{route('employee.store')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>

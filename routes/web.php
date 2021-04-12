@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,25 +13,24 @@ use Illuminate\Support\Facades\Route;
 |
  */
 Route::get('/', function () {
-    $user = Auth::user();
-    return view('welcome', ['user' => $user]);
+    return view('welcome');
 });
 
 Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
 
-Route::get('user', 'UserController@index')->middleware('auth');
-Route::get('user/edit', 'UserController@edit')->middleware('auth');
-Route::post('user/edit', 'UserController@update')->middleware('auth');
+Route::get('user', 'UserController@index')->name('user')->middleware('auth');
+Route::get('user/edit', 'UserController@edit')->name('user.edit')->middleware('auth');
+Route::put('user/store', 'UserController@update')->name('user.store')->middleware('auth');
 
-Route::get('company', 'CompanyController@index')->middleware('auth');
-Route::get('company/create', 'CompanyController@create')->middleware('auth');
-Route::get('company/{company}', 'CompanyController@show')->middleware('auth');
-Route::post('company/create', 'CompanyController@store')->middleware('auth');
+Route::get('company', 'CompanyController@index')->name('company')->middleware('auth');
+Route::get('company/create', 'CompanyController@create')->name('company.create')->middleware('auth');
+Route::get('company/{company}', 'CompanyController@show')->name('company.show')->middleware('auth');
+Route::post('company/store', 'CompanyController@store')->name('company.store')->middleware('auth');
 
-Route::get('employee', 'EmployeeController@index')->middleware('auth');
-Route::get('employee/create', 'EmployeeController@create')->middleware('auth');
-Route::post('employee/create', 'EmployeeController@store')->middleware('auth');
+Route::get('employee', 'EmployeeController@index')->name('employee')->middleware('auth');
+Route::get('employee/create', 'EmployeeController@create')->name('employee.create')->middleware('auth');
+Route::post('employee/store', 'EmployeeController@store')->name('employee.store')->middleware('auth');
 
 Route::get('country/cities', 'CountryController@getCities')->name('countries.cities')->middleware('auth');

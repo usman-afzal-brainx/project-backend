@@ -25,7 +25,7 @@
     @empty
     <p>No employees yet.</p>
     @endforelse
-    <a href="/company" class="btn btn-primary">Back</a>
+    <a href="{{route('company')}}" class="btn btn-primary">Back</a>
 </div>
 
 

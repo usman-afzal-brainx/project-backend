@@ -46,7 +46,7 @@ class EmployeeController extends Controller
         $company = Company::where('id', request('company'))->first();
 
         if ($company->employees->count() === $company->no_employees) {
-            return redirect('/employee/create');
+            return redirect()->route('employee.create');
         }
 
         $employee = new Employee();
@@ -58,6 +58,6 @@ class EmployeeController extends Controller
         $employee->company_id = request('company');
         $employee->save();
         $employee->projects()->attach(request('project'));
-        return redirect('/employee');
+        return redirect()->route('employee');
     }
 }

@@ -35,9 +35,9 @@ class CompanyController extends Controller
         request()->validate([
             'name' => 'required',
             'city' => 'required | exists:cities,id',
-            'country' => 'required',
+            'country' => 'required | exists:countries,id',
             'no_employees' => ['required', 'integer'],
-            'logo' => 'required',
+            'logo' => 'required | mimes:jpeg,bmp,png',
         ]);
 
         $company = new Company();
