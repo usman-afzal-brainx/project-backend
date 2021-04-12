@@ -8,6 +8,7 @@
             <h2>Company Form</h2>
             <form method="POST" action="{{route('company.store')}}" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
                     <input type="text" class="form-control" name="name" id="name">

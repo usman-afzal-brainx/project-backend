@@ -27,6 +27,10 @@ Route::put('user/store', 'UserController@update')->name('user.store')->middlewar
 Route::get('company', 'CompanyController@index')->name('company')->middleware('auth');
 Route::get('company/create', 'CompanyController@create')->name('company.create')->middleware('auth');
 Route::get('company/{company}', 'CompanyController@show')->name('company.show')->middleware('auth');
+Route::get('company/{company}/edit', 'CompanyController@edit')->name('company.edit')->middleware('auth');
+Route::put('company/{company}/update', 'CompanyController@update')->name('company.update')->middleware('auth');
+Route::get('company/{company}/delete', 'CompanyController@delete')->name('company.delete')->middleware('auth');
+
 Route::post('company/store', 'CompanyController@store')->name('company.store')->middleware('auth');
 
 Route::get('employee', 'EmployeeController@index')->name('employee')->middleware('auth');

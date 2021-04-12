@@ -14,7 +14,11 @@
         <h4>Country</h4>
         <p>{{$company->city->country->name}}</p>
         <h4>Logo</h4>
-        <img src=" {{asset($company->logo_url) }}" alt="">
+        <img src=" {{asset($company->logo_url) }}" alt=""><br>
+        <div class="button pt-2">
+            <a href="{{route('company.edit',['company'=>$company])}}" class="btn btn-primary">Edit</a>
+            <a href="{{route('company.delete',['company'=>$company])}}" class="btn btn-danger">Delete</a>
+        </div>
     </div>
     @empty
     <p>No companies in the database</p>

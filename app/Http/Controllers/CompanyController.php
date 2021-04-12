@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\City;
 use App\Models\Company;
 use App\Models\Country;
 use Illuminate\Support\Facades\Storage;
@@ -23,11 +22,36 @@ class CompanyController extends Controller
         return view('company.show', ['employees' => $employees]);
     }
 
+    public function edit(Company $company)
+    {
+        $countries = $countries = Country::all();
+        return view('company.edit', ['company' => $company, 'countries' => $countries]);
+    }
+
+    public function update(Company $company)
+    {
+        request()->validate([
+            'name' => 'required',
+            'city' => 'required | exists:cities,id',
+            'country' => 'required | exists:countries,id',
+            'no_employees' => ['required', 'integer'],
+            'logo' => 'mimes:jpeg,bmp,png',
+        ]);
+        $company->name = request('name');
+        $company->no_employees = request('no_employees');
+        if (request('logo')) {
+            $path = Storage::putFile('public/images', request('logo'), 'public');
+            $company->logo_url = str_replace('public', 'storage', $path);
+        }
+        $company->city_id = request('city');
+        $company->save();
+        return redirect()->route('company');
+    }
+
     public function create()
     {
         $countries = Country::all();
-        $cities = City::all();
-        return view('company.create', ['countries' => $countries, 'cities' => $cities]);
+        return view('company.create', ['countries' => $countries]);
     }
 
     public function store()
@@ -51,5 +75,11 @@ class CompanyController extends Controller
 
         return redirect("/company");
 
+    }
+
+    public function delete(Company $company)
+    {
+        $company->delete();
+        return redirect()->route('company');
     }
 }
