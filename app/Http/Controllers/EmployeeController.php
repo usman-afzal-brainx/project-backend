@@ -12,7 +12,7 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-        $employees = Employee::latest()->get();
+        $employees = Employee::latest()->paginate(1);
         return view('employee.index', ['employees' => $employees]);
     }
 
@@ -60,4 +60,31 @@ class EmployeeController extends Controller
         $employee->projects()->attach(request('project'));
         return redirect()->route('employee');
     }
+
+    public function edit(Employee $employee)
+    {
+        $departments = Department::all();
+        $designations = Designation::all();
+        $projects = Project::all();
+        $companies = Company::all();
+        return view('employee.edit', [
+            'employee' => $employee,
+            'departments' => $departments,
+            'designations' => $designations,
+            'projects' => $projects,
+            'companies' => $companies,
+        ]);
+    }
+
+    public function update(Employee $employee)
+    {
+        dd($employee);
+    }
+
+    public function delete(Employee $employee)
+    {
+        $employee->delete();
+        return redirect()->route('employee');
+    }
+
 }

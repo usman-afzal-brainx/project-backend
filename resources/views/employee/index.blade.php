@@ -19,11 +19,18 @@
         @empty
         <p>No projects yet.</p>
         @endforelse
+        <div class="buttons">
+            <a href="{{route('employee.edit',['employee'=>$employee])}}" class="btn btn-primary">Edit</a>
+            <a href="{{route('employee.delete', ['employee'=>$employee])}}" class="btn btn-danger">Delete</a>
+        </div>
     </div>
     @empty
     <p>No employees yet.</p>
     @endforelse
     <a href="{{route('employee.create')}}" class="btn btn-primary">Create</a>
+    <div class="d-flex justify-content-center">
+        {!! $employees->links() !!}
+    </div>
 </div>
 
 @endsection

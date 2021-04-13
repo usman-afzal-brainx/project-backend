@@ -36,6 +36,8 @@
             </div>
             <div class="form-group">
                 <label for="logo">Logo</label>
+                <img src=" {{asset($company->logo_url) }}" alt=""><br>
+
                 <input type="file" class="form-control-file" name="logo" id="logo">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>

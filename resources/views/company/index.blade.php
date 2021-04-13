@@ -3,10 +3,12 @@
 @section('content')
 
 <div class="container pt-3 mb-5">
+    <a href="{{route('company.create')}}" class="btn btn-primary">Create</a>
 
     @forelse($companies as $company)
     <div class="company">
-        <h2><a href="{{route('company.show',['company'=>$company->id] )}}">Company</a></h2>
+        <h2><a href="{{route('company.show',['company'=>$company->id] )}}">Company</a>
+        </h2>
         <h4>Name:</h4>
         <p>{{$company->name}}</p>
         <h4>City:</h4>
@@ -23,7 +25,6 @@
     @empty
     <p>No companies in the database</p>
     @endforelse
-    <a href="{{route('company.create')}}" class="btn btn-primary">Create</a>
     <div class="d-flex justify-content-center">
         {!! $companies->links() !!}
     </div>

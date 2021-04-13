@@ -30,11 +30,13 @@ Route::get('company/{company}', 'CompanyController@show')->name('company.show')-
 Route::get('company/{company}/edit', 'CompanyController@edit')->name('company.edit')->middleware('auth');
 Route::put('company/{company}/update', 'CompanyController@update')->name('company.update')->middleware('auth');
 Route::get('company/{company}/delete', 'CompanyController@delete')->name('company.delete')->middleware('auth');
-
 Route::post('company/store', 'CompanyController@store')->name('company.store')->middleware('auth');
 
 Route::get('employee', 'EmployeeController@index')->name('employee')->middleware('auth');
 Route::get('employee/create', 'EmployeeController@create')->name('employee.create')->middleware('auth');
 Route::post('employee/store', 'EmployeeController@store')->name('employee.store')->middleware('auth');
+Route::get('employee/{employee}/edit', 'EmployeeController@edit')->name('employee.edit')->middleware('auth');
+Route::put('employee/{employee}/update', 'EmployeeController@update')->name('employee.update')->middleware('auth');
+Route::get('employee/{employee}/delete', 'EmployeeController@delete')->name('employee.delete')->middleware('auth');
 
 Route::get('country/cities', 'CountryController@getCities')->name('countries.cities')->middleware('auth');
