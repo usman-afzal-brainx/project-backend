@@ -12,10 +12,19 @@ class CompanyController extends Controller
 
     public function index()
     {
-        $user = Auth::user();
-        $companies = Company::where('user_id', $user->id)->get();
-        $companies = Company::latest()->paginate(1);
-        return view('company.index', ['companies' => $companies]);
+        $user = auth('api')->user();
+        if (!$user) {
+            return redirect('/');
+        }
+
+        //$companies = Company::where('user_id', $user->id)->with(['city.country'])->get();
+        $companies = Company::where('user_id', $user->id)->with(['city' => function ($query) {
+            $query->with('country');
+        }])->get();
+
+        // $companies = Company::latest()->paginate(1);
+        return response()->json(['companies' => $companies]);
+        //return view('company.index', ['companies' => $companies]);
     }
 
     public function show(Company $company)

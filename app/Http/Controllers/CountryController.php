@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\City;
+use App\Models\Country;
 use GuzzleHttp\Psr7\Request;
 
 class CountryController extends Controller
@@ -13,5 +14,11 @@ class CountryController extends Controller
         return response()->json([
             'cities' => $cities,
         ]);
+    }
+
+    public function getCountry()
+    {
+        $country = Country::select('id', 'name')->where('id', request('id'))->get();
+        return response()->json(['country' => $country]);
     }
 }
