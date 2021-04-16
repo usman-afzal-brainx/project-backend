@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/company', 'CompanyController@index');
+Route::get('/company/show', 'CompanyController@show');
 Route::get('/company/store', 'CompanyController@store');
 
 Route::get('/country', 'CountryController@getCountry');

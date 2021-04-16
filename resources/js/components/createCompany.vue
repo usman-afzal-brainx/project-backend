@@ -29,15 +29,19 @@
             <div class="company-form-country">
                 <div class="form-group">
                     <label for="country">Country</label>
-                    <select class="custom-select" id="country">
-                        <option selected>Pakistan</option>
+                    <select
+                        class="custom-select"
+                        id="country"
+                        v-model="country"
+                    >
+                        <option>Pakistan</option>
                     </select>
                 </div>
             </div>
             <div class="company-form-city">
                 <div class="form-group">
                     <label for="city">City</label>
-                    <select class="custom-select" id="city">
+                    <select class="custom-select" id="city" v-model="city">
                         <option selected>Lahore</option>
                     </select>
                 </div>
@@ -45,7 +49,12 @@
             <div class="company-form-logo">
                 <div class="form-group">
                     <label for="logo">Logo</label>
-                    <input type="file" class="form-control-file" id="logo" />
+                    <input
+                        type="file"
+                        class="form-control-file"
+                        id="logo"
+                        @change="setLogo"
+                    />
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
@@ -59,10 +68,16 @@ export default {
         return {
             name: "",
             no_employees: "",
-            country: "",
-            city: "",
+            country: "Pakistan",
+            city: "Lahore",
             logo: ""
         };
+    },
+    created() {},
+    methods: {
+        setLogo(e) {
+            this.logo = e.target.files[0];
+        }
     }
 };
 </script>

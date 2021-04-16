@@ -1948,15 +1948,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       name: "",
       no_employees: "",
-      country: "",
-      city: "",
+      country: "Pakistan",
+      city: "Lahore",
       logo: ""
     };
+  },
+  created: function created() {},
+  methods: {
+    setLogo: function setLogo(e) {
+      this.logo = e.target.files[0];
+    }
   }
 });
 
@@ -37686,11 +37701,93 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._m(1),
+      _c("div", { staticClass: "company-form-country" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "country" } }, [_vm._v("Country")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.country,
+                  expression: "country"
+                }
+              ],
+              staticClass: "custom-select",
+              attrs: { id: "country" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.country = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            [_c("option", [_vm._v("Pakistan")])]
+          )
+        ])
+      ]),
       _vm._v(" "),
-      _vm._m(2),
+      _c("div", { staticClass: "company-form-city" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "city" } }, [_vm._v("City")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.city,
+                  expression: "city"
+                }
+              ],
+              staticClass: "custom-select",
+              attrs: { id: "city" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.city = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            [_c("option", { attrs: { selected: "" } }, [_vm._v("Lahore")])]
+          )
+        ])
+      ]),
       _vm._v(" "),
-      _vm._m(3),
+      _c("div", { staticClass: "company-form-logo" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "logo" } }, [_vm._v("Logo")]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control-file",
+            attrs: { type: "file", id: "logo" },
+            on: { change: _vm.setLogo }
+          })
+        ])
+      ]),
       _vm._v(" "),
       _c(
         "button",
@@ -37707,51 +37804,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "company-form-label" }, [
       _c("h2", [_vm._v("Company Form")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "company-form-country" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "country" } }, [_vm._v("Country")]),
-        _vm._v(" "),
-        _c(
-          "select",
-          { staticClass: "custom-select", attrs: { id: "country" } },
-          [_c("option", { attrs: { selected: "" } }, [_vm._v("Pakistan")])]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "company-form-city" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "city" } }, [_vm._v("City")]),
-        _vm._v(" "),
-        _c("select", { staticClass: "custom-select", attrs: { id: "city" } }, [
-          _c("option", { attrs: { selected: "" } }, [_vm._v("Lahore")])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "company-form-logo" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "logo" } }, [_vm._v("Logo")]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control-file",
-          attrs: { type: "file", id: "logo" }
-        })
-      ])
     ])
   }
 ]
