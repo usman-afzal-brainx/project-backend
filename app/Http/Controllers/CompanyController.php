@@ -72,20 +72,19 @@ class CompanyController extends Controller
             'city' => 'required | exists:cities,id',
             'country' => 'required | exists:countries,id',
             'no_employees' => ['required', 'integer'],
-            'logo' => 'required | mimes:jpeg,bmp,png',
+            'logo' => 'mimes:jpeg,bmp,png',
         ]);
-
         $company = new Company();
-        $user = Auth::user();
-        $path = Storage::putFile('public/images', request('logo'), 'public');
+        $user = auth('api')->user();
         $company->name = request('name');
         $company->no_employees = request('no_employees');
-        $company->logo_url = str_replace('public', 'storage', $path);
+        if (request('logo')) {
+            $path = Storage::putFile('public/images', request('logo'), 'public');
+            $company->logo_url = str_replace('public', 'storage', $path);
+        }
         $company->city_id = request('city');
         $company->user_id = $user->id;
         $company->save();
-
-        return redirect("/company");
 
     }
 

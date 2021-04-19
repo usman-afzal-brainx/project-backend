@@ -19,9 +19,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/company', 'CompanyController@index');
-Route::get('/company/show', 'CompanyController@show');
-Route::get('/company/store', 'CompanyController@store');
+Route::get('/company/{company}', 'CompanyController@show');
+Route::post('/company/store', 'CompanyController@store');
 
-Route::get('/country', 'CountryController@getCountry');
+Route::get('/employee', 'EmployeeController@index');
 
+Route::get('/country', 'CountryController@getCountries');
 Route::get('/country/cities', 'CountryController@getCities');

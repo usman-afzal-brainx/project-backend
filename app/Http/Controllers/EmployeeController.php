@@ -12,8 +12,9 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-        $employees = Employee::latest()->paginate(1);
-        return view('employee.index', ['employees' => $employees]);
+        $employees = Employee::with(['department', 'designation', 'company', 'projects'])->get();
+        return response()->json(['employees' => $employees]);
+        // return view('employee.index', ['employees' => $employees]);
     }
 
     public function create()

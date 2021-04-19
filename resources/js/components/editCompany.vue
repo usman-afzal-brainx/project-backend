@@ -91,7 +91,6 @@
         </form>
     </div>
 </template>
-
 <script>
 export default {
     data() {
@@ -208,7 +207,8 @@ export default {
                 if (!this.company.city) this.errors.city = "City is required.";
                 //if (!this.company.logo) this.errors.logo = "Logo is required.";
             }
-        }
+        },
+        async getCompanyData() {}
     }
 };
 </script>

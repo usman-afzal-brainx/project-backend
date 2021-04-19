@@ -3,19 +3,19 @@
         <div class="row">
             <div class="col-md-8">
                 <h1>Welcome to the Home Page.</h1>
-                <create-company></create-company>
+                <employees></employees>
             </div>
         </div>
     </div>
 </template>
 <script>
-import createCompany from "./createCompany.vue";
+import employees from "./employees.vue";
 export default {
     mounted() {
         // this.fetchUser();
     },
     components: {
-        createCompany
+        employees
     },
     methods: {
         fetchUser() {

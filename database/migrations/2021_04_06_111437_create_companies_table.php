@@ -19,7 +19,7 @@ class CreateCompaniesTable extends Migration
             $table->integer('no_employees');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('city_id');
-            $table->string('logo_url');
+            $table->string('logo_url')->nullable();
             $table->timestamps();
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
