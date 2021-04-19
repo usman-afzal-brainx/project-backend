@@ -23,6 +23,8 @@ Route::get('/company/{company}', 'CompanyController@show');
 Route::post('/company/store', 'CompanyController@store');
 
 Route::get('/employee', 'EmployeeController@index');
+Route::get('/employee/create', 'EmployeeController@create');
+Route::post('/employee/store', 'EmployeeController@store');
 
 Route::get('/country', 'CountryController@getCountries');
 Route::get('/country/cities', 'CountryController@getCities');

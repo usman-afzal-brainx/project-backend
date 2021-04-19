@@ -23,13 +23,13 @@ class EmployeeController extends Controller
         $designations = Designation::all();
         $projects = Project::all();
         $companies = Company::all();
-
-        return view('employee.create', [
-            'departments' => $departments,
-            'designations' => $designations,
-            'projects' => $projects,
-            'companies' => $companies,
-        ]);
+        return response()->json(['departments' => $departments, 'designations' => $designations, 'projects' => $projects, 'companies' => $companies]);
+        // return view('employee.create', [
+        //     'departments' => $departments,
+        //     'designations' => $designations,
+        //     'projects' => $projects,
+        //     'companies' => $companies,
+        // ]);
     }
 
     public function store()
@@ -59,7 +59,7 @@ class EmployeeController extends Controller
         $employee->company_id = request('company');
         $employee->save();
         $employee->projects()->attach(request('project'));
-        return redirect()->route('employee');
+
     }
 
     public function edit(Employee $employee)

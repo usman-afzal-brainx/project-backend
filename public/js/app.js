@@ -1856,7 +1856,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _employees_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./employees.vue */ "./resources/js/components/employees.vue");
+/* harmony import */ var _employees_createEmployee_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./employees/createEmployee.vue */ "./resources/js/components/employees/createEmployee.vue");
 //
 //
 //
@@ -1872,7 +1872,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {// this.fetchUser();
   },
   components: {
-    employees: _employees_vue__WEBPACK_IMPORTED_MODULE_0__.default
+    createEmployee: _employees_createEmployee_vue__WEBPACK_IMPORTED_MODULE_0__.default
   },
   methods: {
     fetchUser: function fetchUser() {
@@ -1893,10 +1893,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/employees.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/employees.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/employees/createEmployee.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/employees/createEmployee.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -1965,10 +1965,61 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      employees: []
+      companies: [],
+      departments: [],
+      projects: [],
+      designations: [],
+      employee: {
+        name: "",
+        father_name: "",
+        company: "",
+        designation: "",
+        department: "",
+        project: ""
+      }
     };
   },
   created: function created() {
@@ -1983,9 +2034,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 0:
               _context.prev = 0;
               _context.next = 3;
-              return axios.get("/api/employee", {
+              return axios.get("/api/employee/create", {
                 headers: {
-                  Authorization: "Bearer " + window.api_token,
+                  Authorization: "Bearer" + window.api_token,
                   Accept: "application/json"
                 }
               });
@@ -1993,23 +2044,71 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 3:
               _yield$axios$get = _context.sent;
               data = _yield$axios$get.data;
-              console.log(data);
-              _this.employees = data.employees;
-              _context.next = 12;
+              _this.companies = data.companies;
+              _this.departments = data.departments;
+              _this.projects = data.projects;
+              _this.designations = data.designations;
+              if (_this.companies && _this.companies.length > 0) _this.employee.company = _this.companies[0].id;
+              if (_this.designations && _this.designations.length > 0) _this.employee.designation = _this.designations[0].id;
+              if (_this.departments && _this.departments.length > 0) _this.employee.department = _this.departments[0].id;
+              if (_this.projects && _this.projects.length > 0) _this.employee.project = _this.projects[0].id;
+              _context.next = 18;
               break;
 
-            case 9:
-              _context.prev = 9;
+            case 15:
+              _context.prev = 15;
               _context.t0 = _context["catch"](0);
               console.log(_context.t0);
 
-            case 12:
+            case 18:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 9]]);
+      }, _callee, null, [[0, 15]]);
     }))();
+  },
+  methods: {
+    handleSubmit: function handleSubmit() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var data;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                data = {
+                  name: _this2.employee.name,
+                  f_name: _this2.employee.father_name,
+                  company: _this2.employee.company,
+                  designation: _this2.employee.designation,
+                  department: _this2.employee.department,
+                  project: _this2.employee.project
+                };
+                _context2.prev = 1;
+                _context2.next = 4;
+                return axios.post("/api/employee/store", data);
+
+              case 4:
+                _this2.employee.name = "";
+                _this2.employee.father_name = "";
+                _context2.next = 11;
+                break;
+
+              case 8:
+                _context2.prev = 8;
+                _context2.t0 = _context2["catch"](1);
+                console.log(_context2.t0);
+
+              case 11:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[1, 8]]);
+      }))();
+    }
   }
 });
 
@@ -38276,10 +38375,10 @@ component.options.__file = "resources/js/components/ExampleComponent.vue"
 
 /***/ }),
 
-/***/ "./resources/js/components/employees.vue":
-/*!***********************************************!*\
-  !*** ./resources/js/components/employees.vue ***!
-  \***********************************************/
+/***/ "./resources/js/components/employees/createEmployee.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/employees/createEmployee.vue ***!
+  \**************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -38287,9 +38386,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _employees_vue_vue_type_template_id_f37fc16c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./employees.vue?vue&type=template&id=f37fc16c& */ "./resources/js/components/employees.vue?vue&type=template&id=f37fc16c&");
-/* harmony import */ var _employees_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./employees.vue?vue&type=script&lang=js& */ "./resources/js/components/employees.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _createEmployee_vue_vue_type_template_id_75ab38df___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createEmployee.vue?vue&type=template&id=75ab38df& */ "./resources/js/components/employees/createEmployee.vue?vue&type=template&id=75ab38df&");
+/* harmony import */ var _createEmployee_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./createEmployee.vue?vue&type=script&lang=js& */ "./resources/js/components/employees/createEmployee.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -38298,9 +38397,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
-  _employees_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _employees_vue_vue_type_template_id_f37fc16c___WEBPACK_IMPORTED_MODULE_0__.render,
-  _employees_vue_vue_type_template_id_f37fc16c___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _createEmployee_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _createEmployee_vue_vue_type_template_id_75ab38df___WEBPACK_IMPORTED_MODULE_0__.render,
+  _createEmployee_vue_vue_type_template_id_75ab38df___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
   null,
@@ -38310,7 +38409,7 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/employees.vue"
+component.options.__file = "resources/js/components/employees/createEmployee.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
@@ -38331,10 +38430,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/employees.vue?vue&type=script&lang=js&":
-/*!************************************************************************!*\
-  !*** ./resources/js/components/employees.vue?vue&type=script&lang=js& ***!
-  \************************************************************************/
+/***/ "./resources/js/components/employees/createEmployee.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/employees/createEmployee.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -38342,8 +38441,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_employees_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./employees.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/employees.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_employees_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_createEmployee_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./createEmployee.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/employees/createEmployee.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_createEmployee_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
@@ -38364,19 +38463,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/employees.vue?vue&type=template&id=f37fc16c&":
-/*!******************************************************************************!*\
-  !*** ./resources/js/components/employees.vue?vue&type=template&id=f37fc16c& ***!
-  \******************************************************************************/
+/***/ "./resources/js/components/employees/createEmployee.vue?vue&type=template&id=75ab38df&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/employees/createEmployee.vue?vue&type=template&id=75ab38df& ***!
+  \*********************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_employees_vue_vue_type_template_id_f37fc16c___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_employees_vue_vue_type_template_id_f37fc16c___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_createEmployee_vue_vue_type_template_id_75ab38df___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_createEmployee_vue_vue_type_template_id_75ab38df___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_employees_vue_vue_type_template_id_f37fc16c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./employees.vue?vue&type=template&id=f37fc16c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/employees.vue?vue&type=template&id=f37fc16c&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_createEmployee_vue_vue_type_template_id_75ab38df___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./createEmployee.vue?vue&type=template&id=75ab38df& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/employees/createEmployee.vue?vue&type=template&id=75ab38df&");
 
 
 /***/ }),
@@ -38405,7 +38504,7 @@ var render = function() {
         [
           _c("h1", [_vm._v("Welcome to the Home Page.")]),
           _vm._v(" "),
-          _c("employees")
+          _c("create-employee")
         ],
         1
       )
@@ -38419,10 +38518,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/employees.vue?vue&type=template&id=f37fc16c&":
-/*!*********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/employees.vue?vue&type=template&id=f37fc16c& ***!
-  \*********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/employees/createEmployee.vue?vue&type=template&id=75ab38df&":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/employees/createEmployee.vue?vue&type=template&id=75ab38df& ***!
+  \************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -38437,88 +38536,288 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container-fluid" }, [
     _c("div", { staticClass: "row" }, [
-      _vm.employees.length === 0
-        ? _c("div", { staticClass: "no-employee-message col-sm-5" }, [
-            _c("p", [
-              _vm._v(
-                "\n                There are no employees in database\n            "
-              )
-            ])
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.employees.length > 0
-        ? _c(
-            "div",
-            { staticClass: "col-sm-5" },
-            _vm._l(_vm.employees, function(employee) {
-              return _c(
-                "div",
-                { key: employee.id, staticClass: "employee" },
-                [
-                  _vm._m(0, true),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "employee-name" }, [
-                    _c("h4", [_vm._v("Name:")]),
-                    _vm._v(" "),
-                    _c("p", [_vm._v(_vm._s(employee.name))])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "employee-father-name" }, [
-                    _c("h4", [_vm._v("Father Name:")]),
-                    _vm._v(" "),
-                    _c("p", [_vm._v(_vm._s(employee.father_name))])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "employee-designation" }, [
-                    _c("h4", [_vm._v("Designation:")]),
-                    _vm._v(" "),
-                    _c("p", [_vm._v(_vm._s(employee.designation.name))])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "employee-department" }, [
-                    _c("h4", [_vm._v("Department:")]),
-                    _vm._v(" "),
-                    _c("p", [_vm._v(_vm._s(employee.department.name))])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "employee-company" }, [
-                    _c("h4", [_vm._v("Company:")]),
-                    _vm._v(" "),
-                    _c("p", [_vm._v(_vm._s(employee.company.name))])
-                  ]),
-                  _vm._v(" "),
-                  _vm._l(employee.projects, function(project) {
+      _c("div", { staticClass: "col-sm-6" }, [
+        _c("div", { staticClass: "create-employee" }, [
+          _c("h1", [_vm._v("Create Employee Form")]),
+          _vm._v(" "),
+          _c(
+            "form",
+            {
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.handleSubmit($event)
+                }
+              }
+            },
+            [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.employee.name,
+                      expression: "employee.name"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", id: "name" },
+                  domProps: { value: _vm.employee.name },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.employee, "name", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "father_name" } }, [
+                  _vm._v("Father Name: ")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.employee.father_name,
+                      expression: "employee.father_name"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", id: "father_name" },
+                  domProps: { value: _vm.employee.father_name },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.employee, "father_name", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "department" } }, [
+                  _vm._v("Department: ")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.employee.department,
+                        expression: "employee.department"
+                      }
+                    ],
+                    staticClass: "custom-select",
+                    attrs: { id: "department" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.employee,
+                          "department",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  _vm._l(_vm.departments, function(department) {
                     return _c(
-                      "div",
-                      { key: project.id, staticClass: "employee-project" },
-                      [
-                        _c("h4", [_vm._v("project: " + _vm._s(project.id))]),
-                        _vm._v(" "),
-                        _c("p", [_vm._v(_vm._s(project.name))])
-                      ]
+                      "option",
+                      {
+                        key: department.id,
+                        domProps: { value: department.id }
+                      },
+                      [_vm._v(_vm._s(department.name))]
                     )
-                  })
-                ],
-                2
-              )
-            }),
-            0
+                  }),
+                  0
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "designation" } }, [
+                  _vm._v("Designation: ")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.employee.designation,
+                        expression: "employee.designation"
+                      }
+                    ],
+                    staticClass: "custom-select",
+                    attrs: { id: "designation" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.employee,
+                          "designation",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  _vm._l(_vm.designations, function(designation) {
+                    return _c(
+                      "option",
+                      {
+                        key: designation.id,
+                        domProps: { value: designation.id }
+                      },
+                      [_vm._v(_vm._s(designation.name))]
+                    )
+                  }),
+                  0
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "project" } }, [
+                  _vm._v("Project: ")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.employee.project,
+                        expression: "employee.project"
+                      }
+                    ],
+                    staticClass: "custom-select",
+                    attrs: { id: "project" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.employee,
+                          "project",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  _vm._l(_vm.projects, function(project) {
+                    return _c(
+                      "option",
+                      { key: project.id, domProps: { value: project.id } },
+                      [_vm._v(_vm._s(project.name))]
+                    )
+                  }),
+                  0
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "company" } }, [
+                  _vm._v("Company: ")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.employee.company,
+                        expression: "employee.company"
+                      }
+                    ],
+                    staticClass: "custom-select",
+                    attrs: { id: "company" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.employee,
+                          "company",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  _vm._l(_vm.companies, function(company) {
+                    return _c(
+                      "option",
+                      { key: company.id, domProps: { value: company.id } },
+                      [_vm._v(_vm._s(company.name))]
+                    )
+                  }),
+                  0
+                )
+              ]),
+              _vm._v(" "),
+              _c("button", { staticClass: "btn btn-primary" }, [
+                _vm._v("Submit")
+              ])
+            ]
           )
-        : _vm._e()
+        ])
+      ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "heading" }, [
-      _c("h2", [_vm._v("Employee")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
