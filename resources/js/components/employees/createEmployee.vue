@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-7">
                 <div class="create-employee">
                     <h1>Create Employee Form</h1>
                     <form @submit.prevent="handleSubmit">

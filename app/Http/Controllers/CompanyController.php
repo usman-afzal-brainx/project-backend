@@ -29,8 +29,9 @@ class CompanyController extends Controller
 
     public function show(Company $company)
     {
-        $employees = $company->employees;
-        return view('company.show', ['employees' => $employees]);
+        return response()->json(['company' => $company]);
+        // $employees = $company->employees;
+        // return view('company.show', ['employees' => $employees]);
     }
 
     public function edit(Company $company)

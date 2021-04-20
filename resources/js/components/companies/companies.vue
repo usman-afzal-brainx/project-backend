@@ -1,5 +1,8 @@
 <template>
     <div>
+        <router-link to="/route/company/create" class="btn btn-primary"
+            >Create</router-link
+        >
         <div class="company" v-for="company in companies" :key="company.id">
             <div class="heading">
                 <h2>
@@ -27,7 +30,12 @@
                 <img src="" alt="" /><br />
             </div>
             <div class="buttons pt-2">
-                <a class="btn btn-primary">Edit</a>
+                <button
+                    class="btn btn-primary"
+                    v-on:click="handleEdit(company)"
+                >
+                    Edit
+                </button>
                 <a class="btn btn-danger">Delete</a>
             </div>
         </div>
@@ -53,6 +61,14 @@ export default {
             this.companies = companies;
         } catch (ex) {
             console.log(ex);
+        }
+    },
+    methods: {
+        handleEdit(company) {
+            this.$router.push({
+                name: "company.create",
+                params: { company }
+            });
         }
     }
 };

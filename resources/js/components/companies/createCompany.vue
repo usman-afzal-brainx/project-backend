@@ -115,34 +115,9 @@ export default {
         };
     },
     async created() {
-        let token = window.api_token;
-        try {
-            let { data } = await axios.get("/api/country", {
-                headers: {
-                    Authorization: "Bearer " + token,
-                    Accept: "application/json"
-                }
-            });
-            this.countries = data.countries;
-            if (this.countries && this.countries.length > 0) {
-                this.company.country = this.countries[0].id;
-            }
-            let cities = await axios.get("/api/country/cities", {
-                headers: {
-                    Authorization: "Bearer " + token,
-                    Accept: "application/json"
-                },
-                params: {
-                    id: this.company.country
-                }
-            });
-            this.cities = cities.data.cities;
-            if (this.cities && this.cities.length > 0) {
-                this.company.city = this.cities[0].id;
-            }
-        } catch (ex) {
-            console.log(ex);
-        }
+        await this.getCountries();
+        this.setEditParameters();
+        await this.getFirstCities();
     },
     methods: {
         setLogo(e) {
@@ -207,6 +182,50 @@ export default {
                     this.errors.country = "Country is required.";
                 if (!this.company.city) this.errors.city = "City is required.";
                 //if (!this.company.logo) this.errors.logo = "Logo is required.";
+            }
+        },
+        async getCountries() {
+            try {
+                let { data } = await axios.get("/api/country", {
+                    headers: {
+                        Authorization: "Bearer " + window.api_token,
+                        Accept: "application/json"
+                    }
+                });
+                this.countries = data.countries;
+                if (this.countries && this.countries.length > 0) {
+                    this.company.country = this.countries[0].id;
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        async getFirstCities() {
+            try {
+                let cities = await axios.get("/api/country/cities", {
+                    headers: {
+                        Authorization: "Bearer " + window.api_token,
+                        Accept: "application/json"
+                    },
+                    params: {
+                        id: this.company.country
+                    }
+                });
+                this.cities = cities.data.cities;
+                if (this.cities && this.cities.length > 0) {
+                    this.company.city = this.cities[0].id;
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        setEditParameters() {
+            if (this.$route.params.company) {
+                const { company } = this.$route.params;
+                this.company.name = company.name;
+                this.company.no_employees = company.no_employees;
+                this.company.country = company.city.country_id;
+                this.company.city = company.city.city_id;
             }
         }
     }

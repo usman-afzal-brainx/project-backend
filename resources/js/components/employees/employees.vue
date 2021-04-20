@@ -9,7 +9,13 @@
                     There are no employees in database
                 </p>
             </div>
+
             <div class="col-sm-5" v-if="employees.length > 0">
+                <router-link
+                    to="/route/employee/create"
+                    class="btn btn-primary mt-2 mb-2"
+                    >Create</router-link
+                >
                 <div
                     class="employee"
                     v-for="employee in employees"
@@ -74,3 +80,10 @@ export default {
     }
 };
 </script>
+
+<style scoped>
+.employee {
+    margin-bottom: 20px;
+    border-bottom: 1px solid;
+}
+</style>
