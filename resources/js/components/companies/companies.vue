@@ -36,7 +36,12 @@
                 >
                     Edit
                 </button>
-                <a class="btn btn-danger">Delete</a>
+                <button
+                    class="btn btn-danger"
+                    v-on:click="handleDelete(company)"
+                >
+                    Delete
+                </button>
             </div>
         </div>
     </div>
@@ -69,6 +74,25 @@ export default {
                 name: "company.create",
                 params: { company }
             });
+        },
+        async handleDelete(company) {
+            try {
+                await axios.delete("/api/company/delete", {
+                    headers: {
+                        Authorization: "Bearer " + window.api_token,
+                        Accept: "application/json"
+                    },
+                    params: {
+                        id: company.id
+                    }
+                });
+                const companies = this.companies.filter(
+                    c => c.id !== company.id
+                );
+                this.companies = companies;
+            } catch (error) {
+                console.log(error);
+            }
         }
     }
 };

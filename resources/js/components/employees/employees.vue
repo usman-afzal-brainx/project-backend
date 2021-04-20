@@ -8,6 +8,11 @@
                 <p>
                     There are no employees in database
                 </p>
+                <router-link
+                    to="/route/employee/create"
+                    class="btn btn-primary mt-2 mb-2"
+                    >Create</router-link
+                >
             </div>
 
             <div class="col-sm-5" v-if="employees.length > 0">

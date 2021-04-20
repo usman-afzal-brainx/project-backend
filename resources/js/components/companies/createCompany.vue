@@ -73,20 +73,7 @@
                     </p>
                 </div>
             </div>
-            <!-- <div class="company-form-logo">
-                <div class="form-group">
-                    <label for="logo">Logo</label>
-                    <input
-                        type="file"
-                        class="form-control-file"
-                        id="logo"
-                        @change="setLogo"
-                    />
-                    <p v-if="errors.logo" style="color: red">
-                        {{ errors.logo }}
-                    </p>
-                </div>
-            </div> -->
+
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
@@ -158,20 +145,36 @@ export default {
                 this.company.country &&
                 this.company.city
             ) {
-                try {
-                    let data = {
-                        api_token: window.api_token,
-                        name: this.company.name,
-                        city: this.company.city,
-                        country: this.company.country,
-                        no_employees: this.company.no_employees
-                    };
-                    await axios.post("/api/company/store", data);
-                    this.company.name = "";
-                    this.company.no_employees = "";
-                    //  this.company.logo = null;
-                } catch (error) {
-                    console.log(error);
+                if (!this.$route.params.company) {
+                    try {
+                        let data = {
+                            api_token: window.api_token,
+                            name: this.company.name,
+                            city: this.company.city,
+                            country: this.company.country,
+                            no_employees: this.company.no_employees
+                        };
+                        await axios.post("/api/company/store", data);
+                        this.$router.push({ path: "/route/company" });
+                        //  this.company.logo = null;
+                    } catch (error) {
+                        console.log(error);
+                    }
+                } else {
+                    try {
+                        let data = {
+                            id: this.$route.params.company.id,
+                            api_token: window.api_token,
+                            name: this.company.name,
+                            city: this.company.city,
+                            country: this.company.country,
+                            no_employees: this.company.no_employees
+                        };
+                        await axios.put("/api/company/update", data);
+                        this.$router.push({ path: "/route/company" });
+                    } catch (error) {
+                        console.log(error);
+                    }
                 }
             } else {
                 if (!this.company.name) this.errors.name = "Name is required.";

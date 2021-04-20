@@ -6,7 +6,7 @@ import createCompany from "./components/companies/createCompany.vue";
 import editCompany from "./components/companies/editCompany";
 import employees from "./components/employees/employees.vue";
 import createEmployee from "./components/employees/createEmployee.vue";
-
+import login from "./components/login.vue";
 Vue.use(VueRouter);
 export default new VueRouter({
     routes: [
@@ -21,8 +21,7 @@ export default new VueRouter({
             name: "company.create",
             component: createCompany
         },
-        { path: "/route/employee", component: employees },
-        { path: "/route/user", component: employees }
+        { path: "/route/employee", component: employees }
     ],
     mode: "history"
 });

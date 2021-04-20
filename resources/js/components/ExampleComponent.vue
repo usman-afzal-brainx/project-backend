@@ -37,9 +37,6 @@
                                     to="/route/employee"
                                     >Employee</router-link
                                 >
-                                <router-link class="nav-link" to="/route/user"
-                                    >User</router-link
-                                >
                             </div>
                         </div>
                     </div>

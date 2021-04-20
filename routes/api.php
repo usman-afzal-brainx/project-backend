@@ -21,6 +21,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/company', 'CompanyController@index');
 Route::get('/company/{company}', 'CompanyController@show');
 Route::post('/company/store', 'CompanyController@store');
+Route::put('/company/update', 'CompanyController@update');
+Route::delete('/company/delete', 'CompanyController@delete');
 
 Route::get('/employee', 'EmployeeController@index');
 Route::get('/employee/create', 'EmployeeController@create');
@@ -28,3 +30,6 @@ Route::post('/employee/store', 'EmployeeController@store');
 
 Route::get('/country', 'CountryController@getCountries');
 Route::get('/country/cities', 'CountryController@getCities');
+
+Route::get('/login', 'LoginController@showLoginForm');
+Route::post('/login', 'LoginController@login');

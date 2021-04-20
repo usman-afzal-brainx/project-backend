@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use App\Models\Country;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class CompanyController extends Controller
@@ -12,52 +12,44 @@ class CompanyController extends Controller
 
     public function index()
     {
-        $user = auth('api')->user();
-        if (!$user) {
-            return redirect('/');
-        }
+        // $user = auth('api')->user();
+        // if (!$user) {
+        //     return redirect('/');
+        // }
 
-        //$companies = Company::where('user_id', $user->id)->with(['city.country'])->get();
-        $companies = Company::where('user_id', $user->id)->with(['city' => function ($query) {
+        $companies = Company::with(['city' => function ($query) {
             $query->with('country');
         }])->get();
 
-        // $companies = Company::latest()->paginate(1);
         return response()->json(['companies' => $companies]);
-        //return view('company.index', ['companies' => $companies]);
     }
 
     public function show(Company $company)
     {
         return response()->json(['company' => $company]);
-        // $employees = $company->employees;
-        // return view('company.show', ['employees' => $employees]);
+
     }
 
-    public function edit(Company $company)
-    {
-        $countries = $countries = Country::all();
-        return view('company.edit', ['company' => $company, 'countries' => $countries]);
-    }
-
-    public function update(Company $company)
+    public function update(Request $request)
     {
         request()->validate([
+            'id' => 'required',
             'name' => 'required',
             'city' => 'required | exists:cities,id',
             'country' => 'required | exists:countries,id',
-            'no_employees' => ['required', 'integer'],
+            'no_employees' => 'required | integer',
             'logo' => 'mimes:jpeg,bmp,png',
         ]);
-        $company->name = request('name');
-        $company->no_employees = request('no_employees');
-        if (request('logo')) {
-            $path = Storage::putFile('public/images', request('logo'), 'public');
+        $company = Company::find($request->id);
+        $company->name = $request->name;
+        $company->no_employees = $request->no_employees;
+        if ($request->logo) {
+            $path = Storage::putFile('public/images', $request->logo, 'public');
             $company->logo_url = str_replace('public', 'storage', $path);
         }
-        $company->city_id = request('city');
+        $company->city_id = $request->city;
         $company->save();
-        return redirect()->route('company');
+        return response()->json(['success' => ['Compnay Updated Successfully'], 'code' => 200], 200);
     }
 
     public function create()
@@ -84,14 +76,18 @@ class CompanyController extends Controller
             $company->logo_url = str_replace('public', 'storage', $path);
         }
         $company->city_id = request('city');
-        $company->user_id = $user->id;
+        // $company->user_id = $user->id;
         $company->save();
+        return response()->json(['success' => ['Company Created Successfully'], 'code' => 200], 200);
 
     }
 
-    public function delete(Company $company)
+    public function delete(Request $request)
     {
+        logger($request);
+        $company = Company::find($request->id);
+        logger($company);
         $company->delete();
-        return redirect()->route('company');
+        return response()->json(['success' => ['Company deleted Successfully'], 'code' => 200], 200);
     }
 }

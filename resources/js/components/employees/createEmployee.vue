@@ -145,8 +145,7 @@ export default {
             };
             try {
                 await axios.post("/api/employee/store", data);
-                this.employee.name = "";
-                this.employee.father_name = "";
+                this.$router.push({ path: "/route/employee" });
             } catch (error) {
                 console.log(error);
             }
